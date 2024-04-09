@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace GameFrameX.Timer.Tests
 {
-    public class UnitTestsWeb
+    internal class UnitTests
     {
         private DateTime dateTime, dateTime1;
 
@@ -19,9 +19,8 @@ namespace GameFrameX.Timer.Tests
         public void TestIsUnixSameDay()
         {
             // Arrange
-            long timestamp1 = 1617842400; // April 7, 2021 12:00:00 AM UTC
-            long timestamp2 = 1617896400; // April 7, 2021 12:00:00 PM UTC
-
+            // long timestamp1 = 1617842400; // April 7, 2021 12:00:00 AM UTC
+            // long timestamp2 = 1617896400; // April 7, 2021 12:00:00 PM UTC
             // Act
         }
 
