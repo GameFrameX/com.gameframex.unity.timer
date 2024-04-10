@@ -1,11 +1,12 @@
-using System;
-using GameFrameX.Timer.Runtime;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace GameFrameX.Timer.Runtime
 {
-    public class GameFrameXCroppingHelper : MonoBehaviour
+    [Preserve]
+    public class GameFrameXTimerCroppingHelper : MonoBehaviour
     {
+        [Preserve]
         private void Start()
         {
             _ = typeof(TimerComponent);
