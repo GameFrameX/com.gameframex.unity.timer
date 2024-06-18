@@ -1,5 +1,5 @@
 {
-  "name": "com.alianblank.gameframex.unity.timer",
+  "name": "com.gameframex.unity.timer",
   "displayName": "Game Frame X Timer",
   "category": "Game Framework X",
   "description": "Game Frame X Timer Component",
@@ -9,8 +9,8 @@
     "Game Framework X"
   ],
   "repository": {
-    "name": "com.alianblank.gameframex.unity.timer",
-    "url": "https://github.com/AlianBlank/com.alianblank.gameframex.unity.timer.git",
+    "name": "com.gameframex.unity.timer",
+    "url": "https://github.com/AlianBlank/com.gameframex.unity.timer.git",
     "type": "git"
   },
   "author": {
