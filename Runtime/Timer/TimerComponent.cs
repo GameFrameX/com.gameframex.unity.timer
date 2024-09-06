@@ -30,7 +30,7 @@ namespace GameFrameX.Timer.Runtime
         /// <summary>
         /// 添加一个定时调用的任务
         /// </summary>
-        /// <param name="interval">间隔时间（以毫秒为单位）</param>
+        /// <param name="interval">间隔时间（以秒为单位）</param>
         /// <param name="repeat">重复次数（0 表示无限重复）</param>
         /// <param name="callback">要执行的回调函数</param>
         /// <param name="callbackParam">回调函数的参数（可选）</param>
@@ -42,7 +42,7 @@ namespace GameFrameX.Timer.Runtime
         /// <summary>
         /// 添加一个只执行一次的任务
         /// </summary>
-        /// <param name="interval">间隔时间（以毫秒为单位）</param>
+        /// <param name="interval">间隔时间（以秒为单位）</param>
         /// <param name="callback">要执行的回调函数</param>
         /// <param name="callbackParam">回调函数的参数（可选）</param>
         public void AddOnce(float interval, Action<object> callback, object callbackParam = null)
