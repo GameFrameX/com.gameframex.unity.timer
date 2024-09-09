@@ -1,6 +1,5 @@
 using System;
 using GameFrameX.Runtime;
-using GameFrameX.Timer;
 using UnityEngine;
 
 namespace GameFrameX.Timer.Runtime
@@ -10,6 +9,7 @@ namespace GameFrameX.Timer.Runtime
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("Game Framework/Timer")]
+    [UnityEngine.Scripting.Preserve]
     public class TimerComponent : GameFrameworkComponent
     {
         ITimerManager _timerManager;

@@ -7,6 +7,7 @@ namespace GameFrameX.Timer.Runtime
     /// <summary>
     /// 定时器管理器
     /// </summary>
+    [UnityEngine.Scripting.Preserve]
     public sealed class TimerManager : GameFrameworkModule, ITimerManager
     {
         class TimerItem
