@@ -16,7 +16,7 @@ namespace GameFrameX.Timer.Runtime
 
         protected override void Awake()
         {
-            ImplementationComponentType = Type.GetType(componentType);
+            ImplementationComponentType = Utility.Assembly.GetType(componentType);
             InterfaceComponentType = typeof(ITimerManager);
             base.Awake();
             _timerManager = GameFrameworkEntry.GetModule<ITimerManager>();
