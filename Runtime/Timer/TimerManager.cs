@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameFrameX.Runtime;
 using UnityEngine;
 
 namespace GameFrameX.Timer.Runtime
@@ -88,7 +89,7 @@ namespace GameFrameX.Timer.Runtime
                                 {
                                     timerItem.Callback(timerItem.Param);
                                 }
-                                catch (System.Exception e)
+                                catch (Exception e)
                                 {
                                     timerItem.Deleted = true;
                                     Debug.LogWarning("Timer： timer(internal=" + timerItem.Interval + ", repeat=" + timerItem.Repeat + ") callback error > " + e.Message);
