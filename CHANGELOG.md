@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.0.5...1.1.0) (2025-12-23)
+
+
+### Features
+
+* **ci:** change ci ([23adb6c](https://github.com/gameframex/com.gameframex.unity.timer/commit/23adb6cbb3d4480f39830188f67c760f90fb1b0f))
+
 # Changelog
 
 ## [1.0.5](https://github.com/GameFrameX/com.gameframex.unity.timer/tree/1.0.5) (2025-06-01)
