@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.1.0...1.1.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **ci:** 统一 .github 工作流配置 ([d6d0696](https://github.com/gameframex/com.gameframex.unity.timer/commit/d6d0696cf53c47969307c0cf836b3c0e5d4095c8))
+
 # [1.1.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.0.5...1.1.0) (2025-12-23)
 
 
