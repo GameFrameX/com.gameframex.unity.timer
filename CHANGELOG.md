@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.1.1...1.2.0) (2026-05-30)
+
+
+### Bug Fixes
+
+* **timer:** 修正 AddComponentMenu 路径为 GameFrameX/Timer ([6993e02](https://github.com/gameframex/com.gameframex.unity.timer/commit/6993e025f1ed045884c52d30f78ea0990dfa1f97))
+
+
+### Features
+
+* **timer:** 增强 Timer 模块核心能力 ([442fbf7](https://github.com/gameframex/com.gameframex.unity.timer/commit/442fbf79eaec48063d951a53126a2997c59c25d0))
+* **timer:** 添加异步等待扩展 ([48b63ee](https://github.com/gameframex/com.gameframex.unity.timer/commit/48b63ee7f7b68e38bedfc2808ab32c8bfcb5da02))
+
 ## [1.1.1](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.1.0...1.1.1) (2026-05-28)
 
 
