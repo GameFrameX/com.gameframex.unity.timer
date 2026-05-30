@@ -17,14 +17,15 @@
 </p>
 
 <p align="center">
-  All-in-One Solution for Indie Game Development · Empowering Indie Developers' Dreams
+  Lightweight, thread-safe timer system for Unity — repeated, one-shot, and per-frame callbacks with pause/resume, tags, and async/await support.
 </p>
 
 <p align="center">
   <a href="https://gameframex.doc.alianblank.com">Documentation</a> ·
-  <a href="#quick-start">Quick Start</a> ·
+  <a href="#installation">Installation</a> ·
+  <a href="#usage">Usage</a> ·
   <a href="https://qm.qq.com/q/3dIpogITg">QQ Group</a> ·
-  Language: **English** ·
+  Language: <strong>English</strong> ·
   <a href="README.zh-CN.md">简体中文</a> ·
   <a href="README.zh-TW.md">繁體中文</a> ·
   <a href="README.ja.md">日本語</a> ·
@@ -33,57 +34,205 @@
 
 ---
 
-## Project Overview
+## Features
 
-GameFrameX.Timer is the Timer component for the GameFrameX framework. It provides timer functionality for managing and handling timed tasks in Unity projects, making timer usage simpler and more efficient.
+- **Three timer modes** — repeated (`Add`), one-shot (`AddOnce`), per-frame (`AddUpdate`)
+- **Pause / Resume** — individually by timer ID, or in bulk by tag
+- **Tag-based grouping** — assign string tags for batch pause, resume, and removal
+- **Dual time scale** — each timer uses real time (`Unscaled`) or `Time.timeScale`-affected (`Scaled`)
+- **Thread-safe** — lock-based update loop with out-of-lock callback invocation
+- **Object pooling** — `TimerItem` instances are pooled to minimize GC pressure
+- **Async/await** — `WaitForSecondsAsync`, `WaitForNextFrameAsync`, `WaitForFramesAsync` with `CancellationToken`
+- **Query API** — inspect remaining time, elapsed time, and repeat count
+- **OnComplete callback** — fires when a timer finishes naturally or is removed
+- **IL2CPP safe** — cropping helper prevents type stripping in AOT builds
 
-## Quick Start
+## Installation
 
-### Installation (choose one)
+**1. Scoped Registry (recommended)**
 
-1. Add the following to the `dependencies` section of your `manifest.json`:
-   ```json
-   {"com.gameframex.unity.timer": "https://github.com/GameFrameX/com.gameframex.unity.timer.git"}
-   ```
+Edit your Unity project's `Packages/manifest.json` and add the `scopedRegistries` section:
 
-2. In Unity's Package Manager, use `Git URL` to add the package: https://github.com/GameFrameX/com.gameframex.unity.timer.git
-
-3. Download the repository and place it in your Unity project's `Packages` directory. It will be loaded automatically.
-
-### Usage
-
-```csharp
-// Get the Timer component
-var timerComponent = GameEntry.GetComponent<TimerComponent>();
-
-// Add a recurring task: execute every 1000ms, repeat 5 times
-timerComponent.Add(1000, 5, MyMethod);
-
-// Add a one-time task: execute after 5000ms
-timerComponent.AddOnce(5000, MyMethod);
-
-// Add a per-frame update task
-timerComponent.AddUpdate(MyMethod);
-
-// Check if a task exists
-bool exists = timerComponent.Exists(MyMethod);
-
-// Remove a task
-timerComponent.Remove(MyMethod);
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "GameFrameX",
+      "url": "https://gameframex.upm.alianblank.uk",
+      "scopes": [
+        "com.gameframex"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.gameframex.unity.timer": "1.1.1"
+  }
+}
 ```
 
-## Documentation & Resources
+`scopes` controls which packages are resolved through this registry. Only packages whose names start with `com.gameframex` will be fetched from it.
+
+**2. Git URL**
+
+In Unity, open **Window → Package Manager → Add package from git URL** and enter:
+
+```
+https://github.com/GameFrameX/com.gameframex.unity.timer.git
+```
+
+**3. Manual**
+
+Clone or download this repository into your project's `Packages/` directory.
+
+## Usage
+
+All examples use `TimerComponent`, the Unity `MonoBehaviour` wrapper. Obtain it via the GameFrameX component system:
+
+```csharp
+using GameFrameX.Timer.Runtime;
+
+var timer = GameEntry.GetComponent<TimerComponent>();
+```
+
+### Repeated Timer
+
+Fires at the given interval (milliseconds). `repeat` controls how many times it fires; `0` means infinite.
+
+```csharp
+// Fire every 1 second, repeat 5 times
+int id = timer.Add(1000f, 5, (param) =>
+{
+    Debug.Log("Tick!");
+});
+```
+
+### One-Shot Timer
+
+Fires once after the interval, then auto-removes.
+
+```csharp
+timer.AddOnce(3000f, (param) =>
+{
+    Debug.Log("3 seconds elapsed");
+});
+```
+
+### Per-Frame Callback
+
+Fires every frame.
+
+```csharp
+timer.AddUpdate((param) =>
+{
+    // called every Update
+});
+```
+
+### Pause & Resume
+
+```csharp
+timer.Pause(id);
+
+if (timer.IsPaused(id))
+{
+    timer.Resume(id);
+}
+```
+
+### Tag-Based Batch Operations
+
+```csharp
+// Assign a tag when creating
+timer.Add(1000f, 0, callback, tag: "enemy-spawn");
+
+// Operate on all timers with that tag
+timer.PauseByTag("enemy-spawn");
+timer.ResumeByTag("enemy-spawn");
+timer.RemoveByTag("enemy-spawn");
+
+// Check if any timer has a given tag
+bool hasTag = timer.HasTag("enemy-spawn");
+```
+
+### Query Timer State
+
+```csharp
+float remaining = timer.GetRemaining(id);    // seconds until next fire, -1 if not found
+float elapsed   = timer.GetElapsed(id);      // time since last fire, -1 if not found
+int   repeats   = timer.GetRepeatLeft(id);   // remaining fires, -1 if not found, 0 = infinite
+```
+
+### OnComplete Callback
+
+```csharp
+timer.Add(1000f, 3, callback, onComplete: () =>
+{
+    Debug.Log("Timer finished");
+});
+```
+
+### Time Scale
+
+```csharp
+// Affected by Time.timeScale (useful during slow-motion, pause menus, etc.)
+timer.Add(1000f, 0, callback, timeScale: TimerTimeScale.Scaled);
+```
+
+### Remove & Check Existence
+
+```csharp
+// By callback reference
+timer.Remove(callback);
+bool exists = timer.Exists(callback);
+
+// By timer ID
+timer.Remove(id);
+bool exists = timer.Exists(id);
+```
+
+### Async / Await
+
+```csharp
+// Wait 2 seconds
+await timer.WaitForSecondsAsync(2f);
+
+// Wait with cancellation
+var cts = new CancellationTokenSource();
+cts.CancelAfter(5000);
+await timer.WaitForSecondsAsync(10f, cts.Token);
+
+// Wait one frame
+await timer.WaitForNextFrameAsync();
+
+// Wait N frames
+await timer.WaitForFramesAsync(3);
+```
+
+### Exception Handling
+
+Set `TimerManager.CatchCallbackExceptions` to `true` to catch exceptions in timer callbacks and log them as warnings instead of propagating.
+
+```csharp
+TimerManager.CatchCallbackExceptions = true;
+```
+
+## Requirements
+
+- Unity 2019.4 or later
+- [com.gameframex.unity](https://github.com/GameFrameX/com.gameframex.unity) 1.1.1+
+
+## Documentation
 
 - [Official Documentation](https://gameframex.doc.alianblank.com)
 
-## Community & Support
+## Community
 
 - QQ Group: [Join](https://qm.qq.com/q/3dIpogITg)
 
 ## Changelog
 
-See [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases) for changelog.
+See [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases) for version history.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE) file for details.
+[MIT](LICENSE.md)
