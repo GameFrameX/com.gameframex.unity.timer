@@ -1,7 +1,8 @@
 {
     "name": "GameFrameX.Timer.Tests",
     "references": [
-        "GameFrameX.Timer.Runtime"
+        "GameFrameX.Timer.Runtime",
+        "GameFrameX.Runtime"
     ],
     "rootNamespace": "GameFrameX.Timer.Tests",
     "includePlatforms": [
