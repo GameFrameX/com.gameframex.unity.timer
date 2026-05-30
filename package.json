@@ -9,6 +9,9 @@
     "GameFrameX",
     "Timer"
   ],
+  "documentationUrl": "https://gameframex.doc.alianblank.com",
+  "changelogUrl": "https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE.md",
   "repository": {
     "name": "com.gameframex.unity.timer",
     "url": "git+https://github.com/gameframex/com.gameframex.unity.timer.git",
