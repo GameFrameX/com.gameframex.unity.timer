@@ -235,4 +235,4 @@ See [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases
 
 ## License
 
-[MIT](LICENSE.md)
+[License](LICENSE.md)

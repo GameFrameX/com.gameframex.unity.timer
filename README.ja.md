@@ -235,4 +235,4 @@ TimerManager.CatchCallbackExceptions = true;
 
 ## ライセンス
 
-[MIT](LICENSE.md)
+[ライセンス](LICENSE.md)

@@ -235,4 +235,4 @@ TimerManager.CatchCallbackExceptions = true;
 
 ## 开源协议
 
-[MIT](LICENSE.md)
+[开源协议](LICENSE.md)
