@@ -1,39 +1,24 @@
-<p align="center">
-  <img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160" />
-</p>
+<div align="center">
 
-<h1 align="center">GameFrameX Timer</h1>
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
 
-<p align="center">
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.timer/releases">
-    <img src="https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.timer?style=flat-square" alt="Version" />
-  </a>
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.timer?style=flat-square" alt="License" />
-  </a>
-  <a href="https://gameframex.doc.alianblank.com">
-    <img src="https://img.shields.io/badge/Documentation-online-blue?style=flat-square" alt="Documentation" />
-  </a>
-</p>
+# GameFrameX Timer
 
-<p align="center">
-  轻量级、线程安全的 Unity 计时器系统 — 支持重复、一次性和逐帧回调，具备暂停/恢复、标签分组和 async/await 支持。
-</p>
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.timer)](https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.timer)](https://github.com/GameFrameX/com.gameframex.unity.timer/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-<p align="center">
-  <a href="https://gameframex.doc.alianblank.com">文档</a> ·
-  <a href="#安装">安装</a> ·
-  <a href="#使用">使用</a> ·
-  <a href="https://qm.qq.com/q/3dIpogITg">QQ群</a> ·
-  语言: <a href="README.md">English</a> ·
-  <strong>简体中文</strong> ·
-  <a href="README.zh-TW.md">繁體中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <a href="README.ko.md">한국어</a>
-</p>
+独立游戏前后端一体化解决方案 · 独立游戏开发者的圆梦大使
 
----
+<br />
 
+[文档](https://gameframex.doc.alianblank.com) · [快速开始](#quick-start) · [QQ群](https://qm.qq.com/q/3dIpogITg)
+
+<br />
+
+[English](README.md) | **简体中文** | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+
+</div>
 ## 功能特性
 
 - **三种计时器模式** — 重复（`Add`）、一次性（`AddOnce`）、逐帧（`AddUpdate`）

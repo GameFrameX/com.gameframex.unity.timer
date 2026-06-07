@@ -1,39 +1,24 @@
-<p align="center">
-  <img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160" />
-</p>
+<div align="center">
 
-<h1 align="center">GameFrameX Timer</h1>
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
 
-<p align="center">
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.timer/releases">
-    <img src="https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.timer?style=flat-square" alt="Version" />
-  </a>
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.timer?style=flat-square" alt="License" />
-  </a>
-  <a href="https://gameframex.doc.alianblank.com">
-    <img src="https://img.shields.io/badge/Documentation-online-blue?style=flat-square" alt="Documentation" />
-  </a>
-</p>
+# GameFrameX Timer
 
-<p align="center">
-  가볍고 스레드 안전한 Unity 타이머 시스템 — 반복, 원샷, 프레임별 콜백을 지원하며 일시정지/재개, 태그 그룹화, async/await를 제공합니다.
-</p>
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.timer)](https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.timer)](https://github.com/GameFrameX/com.gameframex.unity.timer/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-<p align="center">
-  <a href="https://gameframex.doc.alianblank.com">문서</a> ·
-  <a href="#설치">설치</a> ·
-  <a href="#사용법">사용법</a> ·
-  <a href="https://qm.qq.com/q/3dIpogITg">QQ 그룹</a> ·
-  언어: <a href="README.md">English</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.zh-TW.md">繁體中文</a> ·
-  <a href="README.ja.md">日本語</a> ·
-  <strong>한국어</strong>
-</p>
+인디 게임 개발자를 위한 올인원 솔루션 · 인디 개발자의 꿈을 실현
 
----
+<br />
 
+[문서](https://gameframex.doc.alianblank.com) · [빠른 시작](#quick-start) · [QQ 그룹](https://qm.qq.com/q/3dIpogITg)
+
+<br />
+
+[English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](README.ja.md) | **한국어**
+
+</div>
 ## 기능
 
 - **3가지 타이머 모드** — 반복(`Add`), 원샷(`AddOnce`), 프레임별(`AddUpdate`)

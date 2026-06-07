@@ -1,39 +1,24 @@
-<p align="center">
-  <img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="GameFrameX Logo" width="160" />
-</p>
+<div align="center">
 
-<h1 align="center">GameFrameX Timer</h1>
+<img src="https://download.alianblank.com/gameframex/gameframex_logo_320.png" alt="Game Frame X Logo" width="160" />
 
-<p align="center">
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.timer/releases">
-    <img src="https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.timer?style=flat-square" alt="Version" />
-  </a>
-  <a href="https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.timer?style=flat-square" alt="License" />
-  </a>
-  <a href="https://gameframex.doc.alianblank.com">
-    <img src="https://img.shields.io/badge/Documentation-online-blue?style=flat-square" alt="Documentation" />
-  </a>
-</p>
+# GameFrameX Timer
 
-<p align="center">
-  軽量でスレッドセーフな Unity タイマーシステム — 繰り返し・ワンショット・フレーム毎コールバックに対応し、一時停止/再開、タググループ、async/await をサポート。
-</p>
+[![License](https://img.shields.io/github/license/GameFrameX/com.gameframex.unity.timer)](https://github.com/GameFrameX/com.gameframex.unity.timer/blob/main/LICENSE.md)
+[![Version](https://img.shields.io/github/v/release/GameFrameX/com.gameframex.unity.timer)](https://github.com/GameFrameX/com.gameframex.unity.timer/releases)
+[![Documentation](https://img.shields.io/badge/Documentation-docs-blue)](https://gameframex.doc.alianblank.com)
 
-<p align="center">
-  <a href="https://gameframex.doc.alianblank.com">ドキュメント</a> ·
-  <a href="#インストール">インストール</a> ·
-  <a href="#使用方法">使用方法</a> ·
-  <a href="https://qm.qq.com/q/3dIpogITg">QQグループ</a> ·
-  言語: <a href="README.md">English</a> ·
-  <a href="README.zh-CN.md">简体中文</a> ·
-  <a href="README.zh-TW.md">繁體中文</a> ·
-  <strong>日本語</strong> ·
-  <a href="README.ko.md">한국어</a>
-</p>
+インディゲーム開発者向けオールインワンソリューション · インディ開発者の夢を支援
 
----
+<br />
 
+[ドキュメント](https://gameframex.doc.alianblank.com) · [クイックスタート](#quick-start) · [QQグループ](https://qm.qq.com/q/3dIpogITg)
+
+<br />
+
+[English](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | **日本語** | [한국어](README.ko.md)
+
+</div>
 ## 機能
 
 - **3つのタイマーモード** — 繰り返し（`Add`）、ワンショット（`AddOnce`）、フレーム毎（`AddUpdate`）
