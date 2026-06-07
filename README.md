@@ -12,7 +12,7 @@ All-in-One Solution for Indie Game Development · Empowering Indie Developers' D
 
 <br />
 
-[Documentation](https://gameframex.doc.alianblank.com) · [Quick Start](#installation) · [QQ Group](https://qm.qq.com/q/3dIpogITg)
+[Documentation](https://gameframex.doc.alianblank.com) · [Quick Start](#installation) · QQ Group: 467608841 / 233840761
 
 <br />
 
