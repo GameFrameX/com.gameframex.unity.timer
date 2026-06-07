@@ -34,7 +34,9 @@
 - **完成回呼** — 計時器自然結束或被移除時觸發 `onComplete`
 - **IL2CPP 安全** — 裁剪輔助類防止 AOT 建置中的類型剥离
 
-## 安裝
+## 快速開始
+
+### 安裝
 
 **1. Scoped Registry（推薦）**
 
@@ -71,7 +73,7 @@ https://github.com/GameFrameX/com.gameframex.unity.timer.git
 
 將此倉庫克隆或下載到 Unity 專案的 `Packages/` 目錄下。
 
-## 使用
+## 使用範例
 
 所有範例使用 `TimerComponent`（Unity `MonoBehaviour` 封裝）。透過 GameFrameX 元件系統取得：
 
@@ -208,7 +210,7 @@ TimerManager.CatchCallbackExceptions = true;
 - Unity 2019.4 或更高版本
 - [com.gameframex.unity](https://github.com/GameFrameX/com.gameframex.unity) 1.1.1+
 
-## 文檔
+## 文檔與資源
 
 - [官方文檔](https://gameframex.doc.alianblank.com)
 
@@ -220,6 +222,16 @@ TimerManager.CatchCallbackExceptions = true;
 
 查看 [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases) 了解版本歷史。
 
+
+## 依賴
+
+| 套件 | 說明 |
+|------|------|
+| `com.gameframex.unity` | 1.1.1 |
+
+## 社區與支援
+
+- QQ群: 467608841 / 233840761
 ## 開源協議
 
 [開源協議](LICENSE.md)

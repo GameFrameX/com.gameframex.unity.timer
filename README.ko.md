@@ -34,7 +34,9 @@
 - **완료 콜백** — 타이머가 자연 종료되거나 제거될 때 `onComplete` 발생
 - **IL2CPP 안전** — 크로핑 헬퍼로 AOT 빌드에서 타입 스트리핑 방지
 
-## 설치
+## 빠른 시작
+
+### 설치
 
 **1. Scoped Registry (권장)**
 
@@ -71,7 +73,7 @@ https://github.com/GameFrameX/com.gameframex.unity.timer.git
 
 이 리포지토리를 클론하거나 다운로드하여 Unity 프로젝트의 `Packages/` 디렉토리에 배치.
 
-## 사용법
+## 사용 예시
 
 모든 예제는 `TimerComponent`(Unity `MonoBehaviour` 래퍼)를 사용합니다. GameFrameX 컴포넌트 시스템에서 가져오기:
 
@@ -208,11 +210,11 @@ TimerManager.CatchCallbackExceptions = true;
 - Unity 2019.4 이상
 - [com.gameframex.unity](https://github.com/GameFrameX/com.gameframex.unity) 1.1.1+
 
-## 문서
+## 문서 및 자료
 
 - [공식 문서](https://gameframex.doc.alianblank.com)
 
-## 커뮤니티
+## 커뮤니티 및 지원
 
 - QQ 그룹: [가입](https://qm.qq.com/q/3dIpogITg)
 
@@ -220,6 +222,12 @@ TimerManager.CatchCallbackExceptions = true;
 
 버전 기록은 [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases)에서 확인하세요.
 
+
+## 의존성
+
+| 패키지 | 설명 |
+|--------|------|
+| `com.gameframex.unity` | 1.1.1 |
 ## 라이선스
 
 [라이선스](LICENSE.md)

@@ -34,7 +34,9 @@
 - **完了コールバック** — タイマーの自然終了または削除時に `onComplete` を発火
 - **IL2CPP 対応** — コードストリッピング防止ヘルパーで AOT ビルドでも型を保持
 
-## インストール
+## クイックスタート
+
+### インストール
 
 **1. Scoped Registry（推奨）**
 
@@ -208,11 +210,11 @@ TimerManager.CatchCallbackExceptions = true;
 - Unity 2019.4 以上
 - [com.gameframex.unity](https://github.com/GameFrameX/com.gameframex.unity) 1.1.1+
 
-## ドキュメント
+## ドキュメントとリソース
 
 - [公式ドキュメント](https://gameframex.doc.alianblank.com)
 
-## コミュニティ
+## コミュニティとサポート
 
 - QQグループ: [参加](https://qm.qq.com/q/3dIpogITg)
 
@@ -220,6 +222,12 @@ TimerManager.CatchCallbackExceptions = true;
 
 バージョン履歴は [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases) をご覧ください。
 
+
+## 依存関係
+
+| パッケージ | 説明 |
+|----------|------|
+| `com.gameframex.unity` | 1.1.1 |
 ## ライセンス
 
 [ライセンス](LICENSE.md)

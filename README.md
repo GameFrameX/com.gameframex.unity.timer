@@ -34,7 +34,9 @@ All-in-One Solution for Indie Game Development · Empowering Indie Developers' D
 - **OnComplete callback** — fires when a timer finishes naturally or is removed
 - **IL2CPP safe** — cropping helper prevents type stripping in AOT builds
 
-## Installation
+## Quick Start
+
+### Installation
 
 **1. Scoped Registry (recommended)**
 
@@ -71,7 +73,7 @@ https://github.com/GameFrameX/com.gameframex.unity.timer.git
 
 Clone or download this repository into your project's `Packages/` directory.
 
-## Usage
+## Usage Examples
 
 All examples use `TimerComponent`, the Unity `MonoBehaviour` wrapper. Obtain it via the GameFrameX component system:
 
@@ -208,11 +210,11 @@ TimerManager.CatchCallbackExceptions = true;
 - Unity 2019.4 or later
 - [com.gameframex.unity](https://github.com/GameFrameX/com.gameframex.unity) 1.1.1+
 
-## Documentation
+## Documentation & Resources
 
 - [Official Documentation](https://gameframex.doc.alianblank.com)
 
-## Community
+## Community & Support
 
 - QQ Group: [Join](https://qm.qq.com/q/3dIpogITg)
 
@@ -220,6 +222,12 @@ TimerManager.CatchCallbackExceptions = true;
 
 See [Releases](https://github.com/GameFrameX/com.gameframex.unity.timer/releases) for version history.
 
+
+## Dependencies
+
+| Package | Description |
+|---------|-------------|
+| `com.gameframex.unity` | 1.1.1 |
 ## License
 
 [License](LICENSE.md)
