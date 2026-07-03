@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.2.0...1.3.0) (2026-07-03)
+
+
+### Features
+
+* **timer:** 将 TimerComponent 注册为自动组件 ([d124615](https://github.com/gameframex/com.gameframex.unity.timer/commit/d124615f92e5bd68e347357e66f6a5e53cd5c7d5))
+
 # [1.2.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.1.1...1.2.0) (2026-05-30)
 
 
