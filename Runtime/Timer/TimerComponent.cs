@@ -12,6 +12,7 @@ namespace GameFrameX.Timer.Runtime
     [DisallowMultipleComponent]
     [AddComponentMenu("GameFrameX/Timer")]
     [UnityEngine.Scripting.Preserve]
+    [GameFrameXAutoComponent(-5000)]
     public class TimerComponent : GameFrameworkComponent
     {
         ITimerManager _timerManager;
