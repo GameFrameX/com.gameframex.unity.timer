@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.3.0...1.3.1) (2026-07-30)
+
+
+### Bug Fixes
+
+* **dependencies:** 更新 com.gameframex.unity 依赖版本至 2.5.1 ([7acb8da](https://github.com/gameframex/com.gameframex.unity.timer/commit/7acb8daa0ada2a68626df44baa193a494e317c20))
+
 # [1.3.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.2.0...1.3.0) (2026-07-03)
 
 

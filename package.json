@@ -3,7 +3,7 @@
   "displayName": "Game Frame X Timer",
   "category": "GameFrameX",
   "description": "GameFrameX Timer — Unity lightweight timer/scheduler package. Supports repeating timers (configurable count), one-shot timers, and per-frame update callbacks with existence checking and removal APIs. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Timer — Unity 轻量级计时器/调度器功能包。支持重复计时器（可配置次数）、一次性计时器和每帧更新回调，提供存在性检查和移除 API。文档：https://gameframex.doc.alianblank.com",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "unity": "2019.4",
   "keywords": [
     "GameFrameX",
