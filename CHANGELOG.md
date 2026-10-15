@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.3.1...2.0.0) (2026-10-15)
+
+
+* feat(module)!: 计时器薄入口化并迁移接口契约 ([52c56fc](https://github.com/gameframex/com.gameframex.unity.timer/commit/52c56fc154bbafd9ce73dd08ee9b17292b6b0e81))
+
+
+### BREAKING CHANGES
+
+* TimerComponent 序列化字段移除，编辑期配置入口收敛到代码 TimerOptions，Play 期经活视图/模块 API 调整。
+
 ## [Unreleased]
 
 ### ⚠ BREAKING CHANGES
