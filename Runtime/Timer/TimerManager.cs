@@ -9,7 +9,7 @@ namespace GameFrameX.Timer.Runtime
     /// 定时器管理器
     /// </summary>
     [UnityEngine.Scripting.Preserve]
-    public sealed class TimerManager : GameFrameworkModule, ITimerManager
+    public sealed class TimerManager : IGameFrameworkModule, ITimerManager, IUpdatableModule, IShutdownableModule
     {
         class TimerItem
         {
@@ -55,10 +55,37 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         public static bool CatchCallbackExceptions = false;
 
-        protected override void Update(float elapseSeconds, float realElapseSeconds)
+        /// <summary>
+        /// 初始化定时器管理器并消费 <see cref="TimerOptions"/> 启动配置（C9 配置终态：模块首次实例化时一次性消费）。
+        /// </summary>
+        [UnityEngine.Scripting.Preserve]
+        public TimerManager()
+        {
+            if (GameFrameXOptions.TryGet<TimerOptions>(out var timerOptions))
+            {
+                CatchCallbackExceptions = timerOptions.CatchCallbackExceptions;
+            }
+        }
+
+        [UnityEngine.Scripting.Preserve]
+        public void Update(float elapseSeconds, float realElapseSeconds)
         {
             lock (Locker)
             {
+                // 先合并本帧新增的定时器，使其从加入后的第一次 Update 即开始累计（与包内单测契约一致）；
+                // 回调在锁外执行，回调内再 Add 走 _toAdd 延迟到下一帧，无重入风险。
+                if (_toAdd.Count > 0)
+                {
+                    var addEnumerator = _toAdd.GetEnumerator();
+                    while (addEnumerator.MoveNext())
+                    {
+                        _items.Add(addEnumerator.Current.Key, addEnumerator.Current.Value);
+                    }
+
+                    addEnumerator.Dispose();
+                    _toAdd.Clear();
+                }
+
                 if (_items.Count > 0)
                 {
                     var enumerator = _items.GetEnumerator();
@@ -130,7 +157,6 @@ namespace GameFrameX.Timer.Runtime
                     enumerator.Dispose();
                 }
 
-
                 int len = _toRemove.Count;
                 if (len > 0)
                 {
@@ -150,17 +176,6 @@ namespace GameFrameX.Timer.Runtime
                     _toRemove.Clear();
                 }
 
-                if (_toAdd.Count > 0)
-                {
-                    var enumerator = _toAdd.GetEnumerator();
-                    while (enumerator.MoveNext())
-                    {
-                        _items.Add(enumerator.Current.Key, enumerator.Current.Value);
-                    }
-
-                    enumerator.Dispose();
-                    _toAdd.Clear();
-                }
             }
 
             // Execute callbacks outside lock to avoid blocking other threads
@@ -190,7 +205,8 @@ namespace GameFrameX.Timer.Runtime
             }
         }
 
-        protected override void Shutdown()
+        [UnityEngine.Scripting.Preserve]
+        public void Shutdown()
         {
             lock (Locker)
             {
@@ -214,6 +230,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="timeScale">时间缩放模式</param>
         /// <param name="onComplete">定时器完成/移除时触发的回调</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int Add(float interval, int repeat, Action<object> callback, object callbackParam = null, string tag = null, TimerTimeScale timeScale = TimerTimeScale.Unscaled, Action onComplete = null)
         {
             lock (Locker)
@@ -259,7 +276,6 @@ namespace GameFrameX.Timer.Runtime
             }
         }
 
-
         /// <summary>
         /// 添加一个只执行一次的任务
         /// </summary>
@@ -267,6 +283,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="callback">要执行的回调函数</param>
         /// <param name="callbackParam">回调函数的参数（可选）</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int AddOnce(float interval, Action<object> callback, object callbackParam = null)
         {
             return Add(interval, 1, callback, callbackParam);
@@ -277,6 +294,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="callback">要执行的回调函数</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int AddUpdate(Action<object> callback)
         {
             return Add(0, 0, callback);
@@ -288,6 +306,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="callback">要执行的回调函数</param>
         /// <param name="callbackParam">回调函数的参数</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int AddUpdate(Action<object> callback, object callbackParam)
         {
             return Add(0, 0, callback, callbackParam);
@@ -298,6 +317,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="callback">要检查的回调函数</param>
         /// <returns>存在返回 true，不存在返回 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool Exists(Action<object> callback)
         {
             lock (Locker)
@@ -306,7 +326,6 @@ namespace GameFrameX.Timer.Runtime
                 {
                     return true;
                 }
-
 
                 if (_items.TryGetValue(callback, out var at))
                 {
@@ -321,6 +340,7 @@ namespace GameFrameX.Timer.Runtime
         /// 移除指定的任务
         /// </summary>
         /// <param name="callback">要移除的回调函数</param>
+        [UnityEngine.Scripting.Preserve]
         public void Remove(Action<object> callback)
         {
             lock (Locker)
@@ -349,6 +369,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>存在且活跃返回 true，否则 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool Exists(int id)
         {
             lock (Locker)
@@ -373,6 +394,7 @@ namespace GameFrameX.Timer.Runtime
         /// 按 ID 移除指定的任务。
         /// </summary>
         /// <param name="id">定时器 ID</param>
+        [UnityEngine.Scripting.Preserve]
         public void Remove(int id)
         {
             lock (Locker)
@@ -392,6 +414,7 @@ namespace GameFrameX.Timer.Runtime
         /// 暂停指定 ID 的定时器（暂停期间不累积时间）。
         /// </summary>
         /// <param name="id">定时器 ID</param>
+        [UnityEngine.Scripting.Preserve]
         public void Pause(int id)
         {
             lock (Locker)
@@ -401,13 +424,7 @@ namespace GameFrameX.Timer.Runtime
                     return;
                 }
 
-                // Timer in _toAdd (pending): also pausable
-                if (_toAdd.ContainsKey(callback))
-                {
-                    return;
-                }
-
-                if (_items.TryGetValue(callback, out var t) && !t.Deleted)
+                if (TryGetLiveTimer(callback, out var t))
                 {
                     t.IsPaused = true;
                 }
@@ -418,6 +435,7 @@ namespace GameFrameX.Timer.Runtime
         /// 恢复指定 ID 的定时器（从暂停处继续累积时间）。
         /// </summary>
         /// <param name="id">定时器 ID</param>
+        [UnityEngine.Scripting.Preserve]
         public void Resume(int id)
         {
             lock (Locker)
@@ -427,13 +445,7 @@ namespace GameFrameX.Timer.Runtime
                     return;
                 }
 
-                // Timer in _toAdd: not paused, no-op is fine
-                if (_toAdd.ContainsKey(callback))
-                {
-                    return;
-                }
-
-                if (_items.TryGetValue(callback, out var t))
+                if (TryGetLiveTimer(callback, out var t))
                 {
                     t.IsPaused = false;
                 }
@@ -445,6 +457,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>暂停中返回 true，否则 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool IsPaused(int id)
         {
             lock (Locker)
@@ -454,7 +467,7 @@ namespace GameFrameX.Timer.Runtime
                     return false;
                 }
 
-                if (_items.TryGetValue(callback, out var t) && !t.Deleted)
+                if (TryGetLiveTimer(callback, out var t))
                 {
                     return t.IsPaused;
                 }
@@ -469,6 +482,7 @@ namespace GameFrameX.Timer.Runtime
         /// 暂停指定标签的所有定时器。
         /// </summary>
         /// <param name="tag">标签名称</param>
+        [UnityEngine.Scripting.Preserve]
         public void PauseByTag(string tag)
         {
             lock (Locker)
@@ -491,6 +505,7 @@ namespace GameFrameX.Timer.Runtime
         /// 恢复指定标签的所有定时器。
         /// </summary>
         /// <param name="tag">标签名称</param>
+        [UnityEngine.Scripting.Preserve]
         public void ResumeByTag(string tag)
         {
             lock (Locker)
@@ -513,6 +528,7 @@ namespace GameFrameX.Timer.Runtime
         /// 移除指定标签的所有定时器。
         /// </summary>
         /// <param name="tag">标签名称</param>
+        [UnityEngine.Scripting.Preserve]
         public void RemoveByTag(string tag)
         {
             lock (Locker)
@@ -534,6 +550,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="tag">标签名称</param>
         /// <returns>存在至少一个定时器返回 true，否则 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool HasTag(string tag)
         {
             lock (Locker)
@@ -549,6 +566,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>剩余秒数；定时器不存在返回 -1</returns>
+        [UnityEngine.Scripting.Preserve]
         public float GetRemaining(int id)
         {
             lock (Locker)
@@ -558,7 +576,7 @@ namespace GameFrameX.Timer.Runtime
                     return -1f;
                 }
 
-                if (_items.TryGetValue(callback, out var t) && !t.Deleted)
+                if (TryGetLiveTimer(callback, out var t))
                 {
                     if (t.Interval <= 0f || t.Repeat == 0)
                     {
@@ -579,6 +597,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>已累积的秒数；定时器不存在返回 -1</returns>
+        [UnityEngine.Scripting.Preserve]
         public float GetElapsed(int id)
         {
             lock (Locker)
@@ -588,7 +607,7 @@ namespace GameFrameX.Timer.Runtime
                     return -1f;
                 }
 
-                if (_items.TryGetValue(callback, out var t) && !t.Deleted)
+                if (TryGetLiveTimer(callback, out var t))
                 {
                     return t.Elapsed;
                 }
@@ -602,6 +621,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>剩余次数（0 表示无限循环）；定时器不存在返回 -1</returns>
+        [UnityEngine.Scripting.Preserve]
         public int GetRepeatLeft(int id)
         {
             lock (Locker)
@@ -611,7 +631,7 @@ namespace GameFrameX.Timer.Runtime
                     return -1;
                 }
 
-                if (_items.TryGetValue(callback, out var t) && !t.Deleted)
+                if (TryGetLiveTimer(callback, out var t))
                 {
                     return t.Repeat;
                 }
@@ -686,6 +706,19 @@ namespace GameFrameX.Timer.Runtime
             t.Tag = newTag;
             // Add to new tag
             AddToTagIndex(t);
+        }
+
+        /// <summary>
+        /// 按 回调 查找存活定时器：优先已合并的 _items，回退待合并的 _toAdd（Add 后、首次 Update 前同样可查询/暂停）。
+        /// </summary>
+        private bool TryGetLiveTimer(Action<object> callback, out TimerItem t)
+        {
+            if (_items.TryGetValue(callback, out t) && !t.Deleted)
+            {
+                return true;
+            }
+
+            return _toAdd.TryGetValue(callback, out t);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="seconds">等待的秒数</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns>当等待时间到达时完成的任务</returns>
+        [UnityEngine.Scripting.Preserve]
         public static Task WaitForSecondsAsync(this ITimerManager timer, float seconds, CancellationToken cancellationToken = default)
         {
             if (cancellationToken.IsCancellationRequested)
@@ -42,6 +43,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="timer">定时器管理器</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns>下一帧到达时完成的任务</returns>
+        [UnityEngine.Scripting.Preserve]
         public static Task WaitForNextFrameAsync(this ITimerManager timer, CancellationToken cancellationToken = default)
         {
             if (cancellationToken.IsCancellationRequested)
@@ -69,6 +71,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="frameCount">要等待的帧数（必须 &gt; 0）</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns>指定帧数到达时完成的任务</returns>
+        [UnityEngine.Scripting.Preserve]
         public static Task WaitForFramesAsync(this ITimerManager timer, int frameCount, CancellationToken cancellationToken = default)
         {
             if (frameCount <= 0)

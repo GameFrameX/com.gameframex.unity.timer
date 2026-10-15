@@ -1,3 +1,36 @@
+## [Unreleased]
+
+### ⚠ BREAKING CHANGES
+
+* **module:** 新增 `TimerOptions` 启动配置（`GameFrameXOptions.Configure`，首场景加载前注入；字段默认值同原 Inspector 序列化默认）
+* **module:** 组件值参数序列化字段移除，`TimerComponent` 保留为薄入口（纯转发），模块经 `GetModule<T>()` / `GameApp.Timer` 直达；编辑期配置入口收敛到代码 Options，Play 期经活视图 / 模块 API 调整
+
+# [2.0.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.3.1...2.0.0) (2026-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **module:** 模块契约全接口化：删除 `GameFrameworkModule` 抽象基类，改为 `IGameFrameworkModule` 标记接口 + 可选能力接口
+
+**新契约形态与迁移对照：**
+
+| 旧基类成员 | 新契约 | 迁移方式 |
+|---|---|---|
+| `: GameFrameworkModule` | `IGameFrameworkModule` | 声明处直接替换（标记接口，可注册进 `GameFrameworkEntry`） |
+| `override void Update(float, float)` | `IUpdatableModule` | 真实实现改 `public`；空实现删除（未实现者不再被轮询） |
+| `override void Shutdown()` | `IShutdownableModule` | 真实实现改 `public`；空实现删除（未实现者不再被关闭） |
+| `override int Priority` | `IPrioritizedModule` | 改 `public int Priority { get; }`；未实现视为 0 |
+
+本包变更：`TimerManager` 实现 `IUpdatableModule`、`IShutdownableModule`。
+
+补充修复（2026-10-10，随全量回归收口）：
+
+- **timer:** `Update` 将待合并定时器（`_toAdd`）的合并提前到 tick 循环之前——`Add` 后的第一次 `Update` 即开始累计，恢复"加入即计时"语义（原实现延迟一拍，包内 55 个自带用例按立即累计语义编写全部失败）
+- **timer:** `GetRemaining` / `GetElapsed` / `GetRepeatLeft` / `Pause` / `Resume` / `IsPaused` 支持查询与操作尚未合并（`Add` 后、首次 `Update` 前）的定时器（新增 `TryGetLiveTimer` 回退查找；原 `Pause` 对 pending 定时器静默忽略）
+- **test:** 单测反射调用 `Update`/`Shutdown` 改用 `Public` 绑定（C7 契约迁移后方法已公开）；`ReAdd_WithDifferentTag` 用例修正为复用同一回调实例
+
+`GameFrameworkEntry.Update` 仅分派 `IUpdatableModule`；`Shutdown` 按优先级反序仅分派 `IShutdownableModule`；tick 与关闭顺序与旧实现完全一致。能力方法仅由宿主入口调用，业务侧继续通过 `GetModule<IXxxManager>()` 访问模块。
+
 ## [1.3.1](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.3.0...1.3.1) (2026-07-30)
 
 

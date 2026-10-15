@@ -41,6 +41,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="timeScale">时间缩放模式</param>
         /// <param name="onComplete">定时器完成/移除时触发的回调</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int Add(float interval, int repeat, Action<object> callback, object callbackParam = null, string tag = null, TimerTimeScale timeScale = TimerTimeScale.Unscaled, Action onComplete = null)
         {
             return _timerManager.Add(interval, repeat, callback, callbackParam, tag, timeScale, onComplete);
@@ -53,6 +54,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="callback">要执行的回调函数</param>
         /// <param name="callbackParam">回调函数的参数（可选）</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int AddOnce(float interval, Action<object> callback, object callbackParam = null)
         {
             return _timerManager.AddOnce(interval, callback, callbackParam);
@@ -63,6 +65,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="callback">要执行的回调函数</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int AddUpdate(Action<object> callback)
         {
             return _timerManager.AddUpdate(callback);
@@ -74,6 +77,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="callback">要执行的回调函数</param>
         /// <param name="callbackParam">回调函数的参数</param>
         /// <returns>定时器的唯一标识符 ID</returns>
+        [UnityEngine.Scripting.Preserve]
         public int AddUpdate(Action<object> callback, object callbackParam)
         {
             return _timerManager.AddUpdate(callback, callbackParam);
@@ -84,6 +88,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="callback">要检查的回调函数</param>
         /// <returns>存在返回 true，不存在返回 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool Exists(Action<object> callback)
         {
             return _timerManager.Exists(callback);
@@ -93,6 +98,7 @@ namespace GameFrameX.Timer.Runtime
         /// 移除指定的任务
         /// </summary>
         /// <param name="callback">要移除的回调函数</param>
+        [UnityEngine.Scripting.Preserve]
         public void Remove(Action<object> callback)
         {
             _timerManager.Remove(callback);
@@ -102,6 +108,7 @@ namespace GameFrameX.Timer.Runtime
         /// 按 ID 移除指定的任务。
         /// </summary>
         /// <param name="id">定时器 ID</param>
+        [UnityEngine.Scripting.Preserve]
         public void Remove(int id)
         {
             _timerManager.Remove(id);
@@ -112,6 +119,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>存在且活跃返回 true，否则 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool Exists(int id)
         {
             return _timerManager.Exists(id);
@@ -121,6 +129,7 @@ namespace GameFrameX.Timer.Runtime
         /// 暂停指定 ID 的定时器（暂停期间不累积时间）。
         /// </summary>
         /// <param name="id">定时器 ID</param>
+        [UnityEngine.Scripting.Preserve]
         public void Pause(int id)
         {
             _timerManager.Pause(id);
@@ -130,6 +139,7 @@ namespace GameFrameX.Timer.Runtime
         /// 恢复指定 ID 的定时器（从暂停处继续累积时间）。
         /// </summary>
         /// <param name="id">定时器 ID</param>
+        [UnityEngine.Scripting.Preserve]
         public void Resume(int id)
         {
             _timerManager.Resume(id);
@@ -140,6 +150,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>暂停中返回 true，否则 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool IsPaused(int id)
         {
             return _timerManager.IsPaused(id);
@@ -149,6 +160,7 @@ namespace GameFrameX.Timer.Runtime
         /// 暂停指定标签的所有定时器。
         /// </summary>
         /// <param name="tag">标签名称</param>
+        [UnityEngine.Scripting.Preserve]
         public void PauseByTag(string tag)
         {
             _timerManager.PauseByTag(tag);
@@ -158,6 +170,7 @@ namespace GameFrameX.Timer.Runtime
         /// 恢复指定标签的所有定时器。
         /// </summary>
         /// <param name="tag">标签名称</param>
+        [UnityEngine.Scripting.Preserve]
         public void ResumeByTag(string tag)
         {
             _timerManager.ResumeByTag(tag);
@@ -167,6 +180,7 @@ namespace GameFrameX.Timer.Runtime
         /// 移除指定标签的所有定时器。
         /// </summary>
         /// <param name="tag">标签名称</param>
+        [UnityEngine.Scripting.Preserve]
         public void RemoveByTag(string tag)
         {
             _timerManager.RemoveByTag(tag);
@@ -177,6 +191,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="tag">标签名称</param>
         /// <returns>存在至少一个定时器返回 true，否则 false</returns>
+        [UnityEngine.Scripting.Preserve]
         public bool HasTag(string tag)
         {
             return _timerManager.HasTag(tag);
@@ -187,6 +202,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>剩余秒数；定时器不存在返回 -1</returns>
+        [UnityEngine.Scripting.Preserve]
         public float GetRemaining(int id)
         {
             return _timerManager.GetRemaining(id);
@@ -197,6 +213,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>已累积的秒数；定时器不存在返回 -1</returns>
+        [UnityEngine.Scripting.Preserve]
         public float GetElapsed(int id)
         {
             return _timerManager.GetElapsed(id);
@@ -207,6 +224,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="id">定时器 ID</param>
         /// <returns>剩余次数（0 表示无限循环）；定时器不存在返回 -1</returns>
+        [UnityEngine.Scripting.Preserve]
         public int GetRepeatLeft(int id)
         {
             return _timerManager.GetRepeatLeft(id);
@@ -218,6 +236,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="seconds">等待的秒数</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns>当等待时间到达时完成的任务</returns>
+        [UnityEngine.Scripting.Preserve]
         public Task WaitForSecondsAsync(float seconds, CancellationToken cancellationToken = default)
         {
             return _timerManager.WaitForSecondsAsync(seconds, cancellationToken);
@@ -228,6 +247,7 @@ namespace GameFrameX.Timer.Runtime
         /// </summary>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns>下一帧到达时完成的任务</returns>
+        [UnityEngine.Scripting.Preserve]
         public Task WaitForNextFrameAsync(CancellationToken cancellationToken = default)
         {
             return _timerManager.WaitForNextFrameAsync(cancellationToken);
@@ -239,6 +259,7 @@ namespace GameFrameX.Timer.Runtime
         /// <param name="frameCount">要等待的帧数（必须 &gt; 0）</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns>指定帧数到达时完成的任务</returns>
+        [UnityEngine.Scripting.Preserve]
         public Task WaitForFramesAsync(int frameCount, CancellationToken cancellationToken = default)
         {
             return _timerManager.WaitForFramesAsync(frameCount, cancellationToken);

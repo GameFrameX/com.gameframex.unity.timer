@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.Scripting;
 
 namespace GameFrameX.Timer.Runtime
 {
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public class GameFrameXTimerCroppingHelper : MonoBehaviour
     {
-        [Preserve]
+        [UnityEngine.Scripting.Preserve]
         private void Start()
         {
-            _ = typeof(TimerComponent);
+            _ = typeof(TimerManager);
             _ = typeof(ITimerManager);
             _ = typeof(TimerManager);
         }

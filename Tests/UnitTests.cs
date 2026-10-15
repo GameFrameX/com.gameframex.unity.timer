@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using GameFrameX.Runtime;
 using GameFrameX.Timer.Runtime;
 using NUnit.Framework;
 
@@ -11,12 +12,12 @@ namespace GameFrameX.Timer.Tests
 
         // ReSharper disable once InconsistentNaming
         private static readonly MethodInfo _updateMethod = typeof(TimerManager)
-            .GetMethod("Update", BindingFlags.NonPublic | BindingFlags.Instance,
+            .GetMethod("Update", BindingFlags.Public | BindingFlags.Instance,
                 null, new[] { typeof(float), typeof(float) }, null);
 
         // ReSharper disable once InconsistentNaming
         private static readonly MethodInfo _shutdownMethod = typeof(TimerManager)
-            .GetMethod("Shutdown", BindingFlags.NonPublic | BindingFlags.Instance,
+            .GetMethod("Shutdown", BindingFlags.Public | BindingFlags.Instance,
                 null, Type.EmptyTypes, null);
 
         private static void InvokeUpdate(TimerManager manager, float elapseSeconds, float realElapseSeconds)
@@ -42,6 +43,22 @@ namespace GameFrameX.Timer.Tests
         public void TearDown()
         {
             InvokeShutdown(_timerManager);
+            TimerManager.CatchCallbackExceptions = false;
+            GameFrameXOptions.Reset(); // 清除 Options 需求标记，避免跨用例静态泄漏
+        }
+
+        [Test]
+        public void Ctor_ConsumesTimerOptions_FromRegistry()
+        {
+            GameFrameXOptions.Reset(); // SetUp 已实例化 TimerManager（需求已标记），先清理再注入
+            GameFrameXOptions.Configure(new TimerOptions { CatchCallbackExceptions = true });
+
+            var manager = new TimerManager();
+
+            Assert.IsTrue(TimerManager.CatchCallbackExceptions, "模块首次实例化应消费 TimerOptions 并同步静态开关");
+
+            // 时机违例：模块已消费后重复 Configure 响亮失败
+            Assert.Throws<GameFrameworkException>(() => GameFrameXOptions.Configure(new TimerOptions()));
         }
 
         // ──────────────── Add / AddOnce / AddUpdate ────────────────
@@ -736,11 +753,12 @@ namespace GameFrameX.Timer.Tests
         [Test]
         public void ReAdd_WithDifferentTag_UpdatesTagIndex()
         {
-            _timerManager.Add(1f, 1, _ => { }, tag: "old-tag");
+            Action<object> callback = _ => { };
+            _timerManager.Add(1f, 1, callback, tag: "old-tag");
             Assert.That(_timerManager.HasTag("old-tag"), Is.True, "Tag index should have old-tag after first add");
 
             // Re-add same callback with new tag
-            _timerManager.Add(1f, 1, _ => { }, tag: "new-tag");
+            _timerManager.Add(1f, 1, callback, tag: "new-tag");
             Assert.That(_timerManager.HasTag("old-tag"), Is.False, "Old tag should be removed from index");
             Assert.That(_timerManager.HasTag("new-tag"), Is.True, "New tag should be in index");
         }
