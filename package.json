@@ -2,7 +2,7 @@
     "name": "com.gameframex.unity.timer",
     "displayName": "Game Frame X Timer",
     "category": "GameFrameX",
-    "description": "GameFrameX Timer — Unity lightweight timer/scheduler package. Supports repeating timers (configurable count), one-shot timers, and per-frame update callbacks with existence checking and removal APIs. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Timer — Unity 轻量级计时器/调度器功能包。支持重复计时器（可配置次数）、一次性计时器和每帧更新回调，提供存在性检查和移除 API。文档：https://gameframex.doc.alianblank.com",
+    "description": "GameFrameX Timer — Unity lightweight timer/scheduler package. Supports repeating timers (configurable or infinite count), one-shot timers and per-frame update callbacks, with pause/resume, tag-based grouping (pause/resume/remove/has by tag), remaining/elapsed/repeat-left queries, scaled and unscaled time modes, and completion callbacks. Also ships Task-based async/await extensions (WaitForSecondsAsync / WaitForNextFrameAsync / WaitForFramesAsync) with CancellationToken support, TimerOptions code startup configuration, and direct module access via GetModule<T>() / GameApp.Timer. Docs: https://gameframex.doc.alianblank.com\n\nGameFrameX Timer — Unity 轻量级计时器/调度器功能包。支持重复计时器（可配置或无限次数）、一次性计时器与每帧更新回调，提供暂停/恢复、基于 Tag 的分组管理（按 Tag 暂停/恢复/移除/判断）、剩余/已流逝/剩余次数查询、受缩放与不受缩放双时间模式及完成回调。附带基于 Task 的异步扩展（WaitForSecondsAsync / WaitForNextFrameAsync / WaitForFramesAsync，支持 CancellationToken 取消）、TimerOptions 代码级启动配置，模块可经 GetModule<T>() / GameApp.Timer 直达。文档：https://gameframex.doc.alianblank.com",
     "version": "2.0.0",
     "unity": "2019.4",
     "keywords": [
