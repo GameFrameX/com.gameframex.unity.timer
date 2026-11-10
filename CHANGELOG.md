@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/gameframex/com.gameframex.unity.timer/compare/2.0.0...2.0.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **timer:** 添加完整 link.xml 防代码裁剪保护 ([233bd5f](https://github.com/gameframex/com.gameframex.unity.timer/commit/233bd5f68daaa9ce5e09dbdcee752158298d92fb))
+
 # [2.0.0](https://github.com/gameframex/com.gameframex.unity.timer/compare/1.3.1...2.0.0) (2026-10-15)
 
 
